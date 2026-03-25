@@ -8,14 +8,21 @@ pipeline {
             }
         }
  
-        stage('Build Docker Image') {
+        stage('Build') {
             steps {
-                sh 'docker build -t java-poc:v1 .'
+                sh 'javac Hello.java'
             }
         }
  
-        stage('Run Container') {
+        stage('Test') {
             steps {
+                sh 'java Hello | grep "Hello from Java Jenkins Docker POC"'
+            }
+        }
+ 
+        stage('Deploy') {
+            steps {
+                sh 'docker build -t java-poc:v1 .'
                 sh '''
                 docker rm -f java-poc-container || true
                 docker run --name java-poc-container java-poc:v1
@@ -24,3 +31,4 @@ pipeline {
         }
     }
 }
+ 
