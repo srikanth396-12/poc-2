@@ -16,7 +16,7 @@ pipeline {
  
         stage('Test') {
             steps {
-                sh 'java Hello | grep "Hello from Java Jenkins Docker POC"'
+                sh 'java Hello | grep "WebHook Works"'
             }
         }
  
