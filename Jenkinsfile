@@ -16,7 +16,7 @@ pipeline {
  
         stage('Test') {
             steps {
-                sh 'java Hello | grep "WebHook Works"'
+                sh 'java Hello | grep "WebHook Works test"'
             }
         }
  
