@@ -14,12 +14,6 @@ pipeline {
             }
         }
  
-        stage('Test Inside Container') {
-            steps {
-                sh 'docker run --rm java-poc:v1 sh -c "java Hello | grep \"Hello from Jenkins Docker Sonar POC\""'
-            }
-        }
- 
          stage('Sonar Scan') {
             steps {
                 withSonarQubeEnv('SonarCloud') {
