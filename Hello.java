@@ -4,6 +4,7 @@ import com.sun.net.httpserver.HttpExchange;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
+import java.nio.charset.StandardCharsets;
  
 public class Hello {
     public static void main(String[] args) throws Exception {
@@ -11,10 +12,14 @@ public class Hello {
  
         server.createContext("/", new HttpHandler() {
             public void handle(HttpExchange exchange) throws IOException {
-                String response = "Hello from Jenkins Docker Sonar POC 🚀";
-                exchange.sendResponseHeaders(200, response.length());
+                String response = "Hello from Jenkins Docker Sonar POC";
+                byte[] bytes = response.getBytes(StandardCharsets.UTF_8);
+ 
+                exchange.getResponseHeaders().set("Content-Type", "text/plain; charset=UTF-8");
+                exchange.sendResponseHeaders(200, bytes.length);
+ 
                 OutputStream os = exchange.getResponseBody();
-                os.write(response.getBytes());
+                os.write(bytes);
                 os.close();
             }
         });
