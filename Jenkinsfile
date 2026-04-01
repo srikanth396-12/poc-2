@@ -47,7 +47,7 @@ pipeline {
         steps {
             sh '''
             docker rm -f java-poc-container || true
-            docker run -d -p 8080:8080 --name java-poc-container java-poc:v1
+            docker run -d -p 8081:8080 --name java-poc-container java-poc:v1
             '''
         }
     }
